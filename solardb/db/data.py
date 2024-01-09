@@ -575,9 +575,9 @@ class SolarDBData(object):
 
                 idf = idf.set_index("dt")
                 idf = idf.reindex(idf.index.union(desired_index))
-                idf["dt"] = idf["dt"].astype("long")
+                idf.set_index(idf.index.astype("long")).sort_index(inplace=True)
                 idf = idf.interpolate(method="linear")
-                idf["dt"] = idf["dt"].astype("datetime64[ns]")
+                idf.set_index(idf.index.astype("datetime64[ns]")).sort_index(inplace=True)
                 idf = idf.reindex(desired_index)
                 return idf
 
