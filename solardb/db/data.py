@@ -418,6 +418,8 @@ class SolarDBData(object):
         columns = get_columns(table=SolarPowerTable, names=columns)
         column_names = [ col.key for col in columns ]
 
+        print(columns)
+
         query = sa.select(columns)
 
         if pp_id is not None:
