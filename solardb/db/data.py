@@ -581,7 +581,7 @@ class SolarDBData(object):
 
 
                 idf = idf.set_index("dt")
-                idf = idf.reindex(idf.index.union(desired_index))
+                idf = idf.reindex(desired_index)
                 summary_col = idf["summary"]
                 idf.drop(columns="summary", inplace=True)
                 for col in idf:
@@ -590,7 +590,7 @@ class SolarDBData(object):
 
                 idf = idf.interpolate(method="time")
                 idf["summary"] = summary_col
-                idf = idf.reindex(desired_index)
+
                 print(idf.dtypes)
                 return idf
 
