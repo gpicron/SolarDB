@@ -584,6 +584,9 @@ class SolarDBData(object):
                 idf = idf.reindex(idf.index.union(desired_index))
                 summary_col = idf["summary"]
                 idf.drop(columns="summary", inplace=True)
+                for col in idf:
+                    idf[col] = pd.to_numeric(idf[col], errors='coerce')
+
                 idf = idf.interpolate(method="time")
                 idf["summary"] = summary_col
                 idf = idf.reindex(desired_index)
