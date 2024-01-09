@@ -576,7 +576,7 @@ class SolarDBData(object):
                 for col in idf:
                     idf[col] = pd.to_numeric(idf[col], errors='coerce')
 
-                print(df.dtypes)
+                print(idf.dtypes)
 
                 idf = idf.set_index("dt")
                 idf = idf.reindex(idf.index.union(desired_index))
