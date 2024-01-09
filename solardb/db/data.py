@@ -427,7 +427,7 @@ class SolarDBData(object):
         column_names = [ col.key for col in columns ]
 
 
-        print(sa.table("solar_power", *column_names))
+#        print(sa.table("solar_power", *column_names))
 
         query = sa.select(*columns)
 
