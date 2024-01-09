@@ -590,6 +590,7 @@ class SolarDBData(object):
                 idf = idf.interpolate(method="time")
                 idf["summary"] = summary_col
                 idf = idf.reindex(desired_index)
+                print(idf.dtypes)
                 return idf
 
             if "pp_id" in df.columns:
