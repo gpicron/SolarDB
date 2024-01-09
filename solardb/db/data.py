@@ -118,6 +118,14 @@ def get_columns(table: any, names: Optional[List[str]] = None) -> List[sa.Column
         col for col in all_columns if col.key in names
     ] if names is not None else all_columns
 
+def get_columns(table: any, names: Optional[List[str]] = None) -> List[sa.Column]:
+    """ Get columns of given, optionally filtered by names. """
+
+    all_columns = list(table.table().columns)
+
+    return [
+        col for col in all_columns if col.key in names
+    ] if names is not None else all_columns
 
 class SolarDBData(object):
     """
@@ -418,9 +426,10 @@ class SolarDBData(object):
         columns = get_columns(table=SolarPowerTable, names=columns)
         column_names = [ col.key for col in columns ]
 
-        print(columns)
 
-        query = sa.select(columns)
+        print(sa.table("solar_power", *column_names))
+
+        query = sa.select(*columns)
 
         if pp_id is not None:
             pp_id = get_pp_id(pp_id=pp_id)
