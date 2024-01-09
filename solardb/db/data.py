@@ -564,12 +564,15 @@ class SolarDBData(object):
             def resample_df(idf: pd.DataFrame) -> pd.DataFrame:
                 if "pp_id" in idf.columns:
                     idf = idf.drop(columns="pp_id")
-                    
+
                 desired_index = pd.date_range(
                         start=res_dt_start, end=res_dt_end + SolarDBConfig.P_FREQUENCY_D,
                         freq=SolarDBConfig.P_FREQUENCY_S, inclusive="left",
                         name="dt",
                     )
+                
+                print(df.dtypes)
+
                 idf = idf.set_index("dt")
                 idf = idf.reindex(idf.index.union(desired_index))
                 idf = idf.interpolate(method="time")
