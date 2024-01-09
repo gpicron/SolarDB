@@ -573,15 +573,15 @@ class SolarDBData(object):
 
                 idf = idf.set_index("dt")
                 idf = idf.reindex(desired_index)
-                src_dt = idf["src_dt"]
+                #src_dt = idf["src_dt"]
 
-                idf.drop(columns=["summary", "src_dt"], inplace=True, errors="ignore")
+                #idf.drop(columns=["summary", "src_dt"], inplace=True, errors="ignore")
                 for col in idf:
                     idf[col] = pd.to_numeric(idf[col], errors='coerce')
 
                 idf = idf.interpolate(method="time")
 
-                idf["src_dt"] = src_dt
+                #idf["src_dt"] = src_dt
 
 
                 return idf
