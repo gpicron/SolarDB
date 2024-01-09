@@ -570,30 +570,20 @@ class SolarDBData(object):
                         freq=SolarDBConfig.P_FREQUENCY_S, inclusive="left",
                         name="dt",
                     )
-                
-                print(idf.dtypes)
-
-#                for col in idf:
-#                    idf[col] = pd.to_numeric(idf[col], errors='coerce')
-
-                print(idf.dtypes)
-
-
 
                 idf = idf.set_index("dt")
                 idf = idf.reindex(desired_index)
-                summary_col = idf["summary"]
                 src_dt = idf["src_dt"]
-                idf.drop(columns="summary", inplace=True)
-                idf.drop(columns="src_dt", inplace=True)
+
+                idf.drop(columns=["summary", "src_dt"], inplace=True, errors="ignore")
                 for col in idf:
                     idf[col] = pd.to_numeric(idf[col], errors='coerce')
 
                 idf = idf.interpolate(method="time")
-                idf["summary"] = summary_col
+
                 idf["src_dt"] = src_dt
 
-                print(idf.dtypes)
+
                 return idf
 
             if "pp_id" in df.columns:
