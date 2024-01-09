@@ -267,9 +267,9 @@ class SolarDBData(object):
 
         pp_id = get_pp_id(pp_id=pp_id)
 
-        query = sa.select([
+        query = sa.select(
             SolarMetaTable.pp_id
-        ]).where(sa.and_(
+        ).where(sa.and_(
             SolarPowerTable.pp_id == pp_id.pp_id,
         ))
         if not pp_id.is_whole_power_plant():
@@ -337,7 +337,7 @@ class SolarDBData(object):
             SolarMetaTable.pp_id,
             SolarMetaTable.inv_id,
         ).distinct()
-        
+
         if pp_id is not None:
             pp_id = get_pp_id(pp_id=pp_id)
             query = query.where(SolarMetaTable.pp_id == pp_id.pp_id)
@@ -368,18 +368,18 @@ class SolarDBData(object):
 
         pp_id = get_pp_id(pp_id=pp_id)
 
-        dt_start = self.conn.execute(sa.select([
+        dt_start = self.conn.execute(sa.select(
             SolarPowerTable.dt
-        ]).order_by(
+        ).order_by(
             SolarPowerTable.dt
         ).where(sa.and_(
             SolarPowerTable.pp_id == pp_id.pp_id,
             SolarPowerTable.inv_id == pp_id.inv_id,
         ))).first()[0]
 
-        dt_last = self.conn.execute(sa.select([
+        dt_last = self.conn.execute(sa.select(
             SolarPowerTable.dt
-        ]).order_by(
+        ).order_by(
             SolarPowerTable.dt.desc()
         ).where(sa.and_(
             SolarPowerTable.pp_id == pp_id.pp_id,
