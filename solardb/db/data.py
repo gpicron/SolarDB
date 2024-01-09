@@ -322,7 +322,7 @@ class SolarDBData(object):
         ).set_index([ "pp_id", "inv_id" ])
 
         result.drop(columns="interval", inplace=True, errors="ignore")
-        result['start'], result['end'] = result.apply(lambda x: self.get_pp_interval((x.pp_id, x.inv_id)))
+        result['start'], result['end'] = result.apply(lambda x: self.get_pp_interval((x['pp_id'], x['inv_id']), axis=1))
 
         return result
 
