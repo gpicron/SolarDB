@@ -209,7 +209,7 @@ class SolarDBAssembler(object):
         )
 
         prediction_df = self.prepare_history(
-            pp_id=pp_id, dt_start=dt_start + datetime.timedelta(hours=history_cnt), history_cnt=history_cnt,
+            pp_id=pp_id, dt_start=dt_start + datetime.timedelta(days=1), history_cnt=history_cnt,
             history_fallback=history_fallback,
         )
         prediction_df['pred_power'] = np.nan
