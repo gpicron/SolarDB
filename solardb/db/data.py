@@ -426,7 +426,7 @@ class SolarDBData(object):
         columns = get_columns(table=SolarPowerTable, names=columns)
         column_names = [ col.key for col in columns ]
 
-        view = sa.table(SolarPowerTable, columns=columns)
+        view = sa.table(SolarPowerTable, columns)
         
 
 
