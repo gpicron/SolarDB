@@ -571,14 +571,16 @@ class SolarDBData(object):
                         name="dt",
                     )
                 
+                print(idf.dtypes)
+
+                for col in idf:
+                    idf[col] = pd.to_numeric(idf[col], errors='coerce')
+
                 print(df.dtypes)
 
                 idf = idf.set_index("dt")
                 idf = idf.reindex(idf.index.union(desired_index))
-                idf.set_index(idf.index.astype("long")).sort_index(inplace=True)
-                idf = idf.reindex(idf.index)
                 idf = idf.interpolate(method="linear")
-                idf.set_index(idf.index.astype("datetime64[ns]")).sort_index(inplace=True)
                 idf = idf.reindex(desired_index)
                 return idf
 
