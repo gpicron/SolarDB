@@ -585,7 +585,8 @@ class SolarDBData(object):
                 summary_col = idf["summary"]
                 idf.drop(columns="summary", inplace=True)
                 for col in idf:
-                    idf[col] = pd.to_numeric(idf[col], errors='coerce')
+                    if idf[col].dtype != np.dtype("timedelta64[ns]"):
+                        idf[col] = pd.to_numeric(idf[col], errors='coerce')
 
                 idf = idf.interpolate(method="time")
                 idf["summary"] = summary_col
