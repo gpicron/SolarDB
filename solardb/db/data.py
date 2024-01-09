@@ -426,8 +426,11 @@ class SolarDBData(object):
         columns = get_columns(table=SolarPowerTable, names=columns)
         column_names = [ col.key for col in columns ]
 
+        view = sa.table(SolarPowerTable, columns=columns)
+        
 
-#        print(sa.table("solar_power", *column_names))
+
+        print(view)
 
         query = sa.select(*columns)
 
