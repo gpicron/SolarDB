@@ -207,9 +207,12 @@ class SolarDBAssembler(object):
             weather_scheme=weather_scheme,
             forecast_delta=forecast_delta,
         )
-        prediction_df = pd.DataFrame(
-            data=None, index=weather_df.index,
-        ).assign(power=np.nan)
+
+        prediction_df = self.prepare_history(
+            pp_id=pp_id, dt_start=dt_start + datetime.timedelta(hours=history_cnt), history_cnt=history_cnt,
+            history_fallback=history_fallback,
+        )
+        prediction_df['pred_power'] = np.nan
 
         return history_df, weather_df, prediction_df
 
