@@ -567,7 +567,7 @@ class SolarDBData(object):
                 return idf.set_index("dt").reindex(
                     pd.date_range(
                         start=res_dt_start, end=res_dt_end + SolarDBConfig.P_FREQUENCY_D,
-                        freq=SolarDBConfig.P_FREQUENCY_S, closed="left",
+                        freq=SolarDBConfig.P_FREQUENCY_S, inclusive="left",
                         name="dt",
                     )
                 ).interpolate(
