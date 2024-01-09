@@ -333,11 +333,11 @@ class SolarDBData(object):
         :return: Returns a list of power plant identifiers.
         """
 
-        query = sa.select([
+        query = sa.select(
             SolarMetaTable.pp_id,
             SolarMetaTable.inv_id,
-        ])
-
+        ).distinct()
+        
         if pp_id is not None:
             pp_id = get_pp_id(pp_id=pp_id)
             query = query.where(SolarMetaTable.pp_id == pp_id.pp_id)
