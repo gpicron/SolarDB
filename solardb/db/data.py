@@ -573,14 +573,19 @@ class SolarDBData(object):
                 
                 print(idf.dtypes)
 
-                for col in idf:
-                    idf[col] = pd.to_numeric(idf[col], errors='coerce')
+#                for col in idf:
+#                    idf[col] = pd.to_numeric(idf[col], errors='coerce')
 
                 print(idf.dtypes)
 
+
+
                 idf = idf.set_index("dt")
                 idf = idf.reindex(idf.index.union(desired_index))
-                idf = idf.interpolate(method="linear")
+                summary_col = idf["summary"]
+                idf.drop(columns="summary", inplace=True)
+                idf = idf.interpolate(method="time")
+                idf["summary"] = summary_col
                 idf = idf.reindex(desired_index)
                 return idf
 
