@@ -42,7 +42,7 @@ class SolarDBAssembler(object):
 
         return pd.date_range(
             start=dt_start, end=dt_end,
-            freq=frequency, closed="left",
+            freq=frequency, inclusive="left",
             name="dt",
         )
 
