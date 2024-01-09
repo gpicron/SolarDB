@@ -426,12 +426,6 @@ class SolarDBData(object):
         columns = get_columns(table=SolarPowerTable, names=columns)
         column_names = [ col.key for col in columns ]
 
-#        view = sa.table(SolarPowerTable.table().name, *columns)
-        
-
-
- #       print(view)
-
         query = sa.select(*columns)
 
         if pp_id is not None:
@@ -509,7 +503,7 @@ class SolarDBData(object):
         columns = get_columns(table=SolarWeatherTable, names=columns)
         column_names = [ col.key for col in columns ]
 
-        query = sa.select(columns)
+        query = sa.select(*columns)
 
         if pp_id is not None:
             pp_id = get_pp_id(pp_id=pp_id)
@@ -640,7 +634,7 @@ class SolarDBData(object):
         columns = get_columns(table=SolarExogenousTable, names=columns)
         column_names = [ col.key for col in columns ]
 
-        query = sa.select(columns)
+        query = sa.select(*columns)
 
         if pp_id is not None:
             pp_id = get_pp_id(pp_id=pp_id)
